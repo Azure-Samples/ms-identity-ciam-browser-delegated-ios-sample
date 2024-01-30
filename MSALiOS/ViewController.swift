@@ -275,7 +275,7 @@ extension ViewController {
                 return
             }
             
-            self.updateLogging(text: "Http response code is: \(httpResponse.statusCode))")
+            self.updateLogging(text: "Accessed API successfully using access token. HTTP response code: \(httpResponse.statusCode)")
             
             }.resume()
     }
