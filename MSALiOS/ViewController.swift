@@ -261,7 +261,7 @@ extension ViewController {
         // Set the Authorization header for the request. We use Bearer tokens, so we specify Bearer + the token we got from the result
         request.setValue("Bearer \(self.accessToken)", forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
                 self.updateLogging(text: "Couldn't get API result: \(error)")
@@ -275,7 +275,16 @@ extension ViewController {
                 return
             }
             
-            self.updateLogging(text: "Accessed API successfully using access token. HTTP response code: \(httpResponse.statusCode)")
+            guard let data = data, let result = try? JSONSerialization.jsonObject(with: data, options: []) else {
+                self.updateLogging(text: "Couldn't deserialize result JSON")
+                return
+            }
+            
+            self.updateLogging(text: """
+                                Accessed API successfully using access token.
+                                HTTP response code: \(httpResponse.statusCode)
+                                HTTP response body: \(result)
+                                """)
             
             }.resume()
     }
