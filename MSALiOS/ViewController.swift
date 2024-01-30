@@ -32,7 +32,7 @@ import MSAL
 
 class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate {
     
-    // Update the below to your client ID you received in the portal. The below is for running the demo only
+    // Update the below to your client ID you received in the portal.
     let kAuthority = "Enter_the_Tenant_Authority_Here"
     let kClientID = "Enter_the_Application_Id_Here"
     let kRedirectUri = "Enter_the_Redirect_URI_Here"
