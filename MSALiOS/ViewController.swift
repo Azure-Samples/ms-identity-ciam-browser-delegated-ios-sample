@@ -192,7 +192,7 @@ extension ViewController {
         }
     }
     
-    func acquireTokenSilently(_ account : MSALAccount!) {
+    func acquireTokenSilently(_ account : MSALAccount) {
         guard let applicationContext = self.applicationContext else { return }
         
         /**
@@ -255,8 +255,13 @@ extension ViewController {
     func getContentWithToken() {
         
         // Specify the API endpoint
-        let url = URL(string: kProtectedAPIEndpoint)
-        var request = URLRequest(url: url!)
+        guard let url = URL(string: kProtectedAPIEndpoint) else {
+            let errorMessage = "Invalid API url"
+            print(errorMessage)
+            updateLogging(text: errorMessage)
+            return
+        }
+        var request = URLRequest(url: url)
         
         // Set the Authorization header for the request. We use Bearer tokens, so we specify Bearer + the token we got from the result
         request.setValue("Bearer \(self.accessToken)", forHTTPHeaderField: "Authorization")
@@ -358,6 +363,8 @@ extension ViewController {
         
         guard let account = self.currentAccount else { return }
         
+        guard let webViewParamaters = self.webViewParamaters else { return }
+        
         do {
             
             /**
@@ -366,7 +373,7 @@ extension ViewController {
              - account:    The account to remove from the cache
              */
             
-            let signoutParameters = MSALSignoutParameters(webviewParameters: self.webViewParamaters!)
+            let signoutParameters = MSALSignoutParameters(webviewParameters: webViewParamaters)
             
             // If testing with Microsoft's shared device mode, trigger signout from browser. More details here:
             // https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-ios-shared-devices
