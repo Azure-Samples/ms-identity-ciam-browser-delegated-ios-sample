@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     func platformViewDidLoadSetup() {
                 
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(appCameToForeGround(notification:)),
+                                               selector: #selector(appCameToforeGround(notification:)),
                                                name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
         
@@ -90,7 +90,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         }
     }
     
-    @objc func appCameToForeGround(notification: Notification) {
+    @objc func appCameToforeGround(notification: Notification) {
         self.loadCurrentAccount()
     }
 }
