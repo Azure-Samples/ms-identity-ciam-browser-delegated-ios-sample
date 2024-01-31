@@ -44,8 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     var webViewParamaters : MSALWebviewParameters?
 
     @IBOutlet var loggingText: UITextView!
-    @IBOutlet var acquireInteractivelyButton: UIButton!
-    @IBOutlet var acquireSilentlyButton: UIButton!
+    @IBOutlet var acquireTokenButton: UIButton!
     @IBOutlet var signOutButton: UIButton!
     @IBOutlet var callAPIButton: UIButton!
     @IBOutlet var usernameLabel: UILabel!
@@ -404,17 +403,14 @@ extension ViewController {
 extension ViewController {
     
     func refreshDeviceMode() {
-        
-        if #available(iOS 13.0, *) {
-            self.applicationContext?.getDeviceInformation(with: nil, completionBlock: { (deviceInformation, error) in
-                
-                guard let deviceInfo = deviceInformation else {
-                    return
-                }
-                
-                self.currentDeviceMode = deviceInfo.deviceMode
-            })
-        }
+        self.applicationContext?.getDeviceInformation(with: nil, completionBlock: { (deviceInformation, error) in
+            
+            guard let deviceInfo = deviceInformation else {
+                return
+            }
+            
+            self.currentDeviceMode = deviceInfo.deviceMode
+        })
     }
 }
 

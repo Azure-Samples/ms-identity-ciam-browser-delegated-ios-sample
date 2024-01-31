@@ -27,26 +27,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7c1-YC-JI1">
-                                <rect key="frame" x="73" y="58" width="229" height="168"/>
+                                <rect key="frame" x="105.5" y="58" width="164" height="123.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqS-iC-us8">
-                                        <rect key="frame" x="0.0" y="0.0" width="229" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="164" height="34.5"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Acquire Token Interactively"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Acquire Token"/>
                                         <connections>
                                             <action selector="acquireTokenInteractively" destination="BYZ-38-t0r" eventType="touchUpInside" id="esO-kE-THA"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZ7-ed-3U0">
-                                        <rect key="frame" x="0.0" y="44.5" width="229" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Acquire Token Silently"/>
-                                        <connections>
-                                            <action selector="acquireTokenSilently" destination="BYZ-38-t0r" eventType="touchUpInside" id="bcU-5i-BMg"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzS-lj-PHn">
-                                        <rect key="frame" x="0.0" y="89" width="229" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="164" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="API - Perform GET"/>
                                         <connections>
@@ -54,7 +46,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OzJ-oW-UOm">
-                                        <rect key="frame" x="0.0" y="133.5" width="229" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="89" width="164" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Sign out"/>
                                         <connections>
@@ -64,7 +56,7 @@
                                 </subviews>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wWW-R9-PKu">
-                                <rect key="frame" x="16" y="256" width="343" height="391"/>
+                                <rect key="frame" x="16" y="211.5" width="343" height="435.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -85,8 +77,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="acquireInteractivelyButton" destination="jqS-iC-us8" id="liG-dD-ri3"/>
-                        <outlet property="acquireSilentlyButton" destination="pZ7-ed-3U0" id="VCH-0u-obt"/>
+                        <outlet property="acquireTokenButton" destination="jqS-iC-us8" id="liG-dD-ri3"/>
                         <outlet property="callAPIButton" destination="rzS-lj-PHn" id="ce1-pe-m5L"/>
                         <outlet property="loggingText" destination="wWW-R9-PKu" id="Exf-cg-3A4"/>
                         <outlet property="signOutButton" destination="OzJ-oW-UOm" id="V6Q-dK-9B3"/>
