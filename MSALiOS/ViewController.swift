@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     let kRedirectUri = "Enter_the_Redirect_URI_Here"
     let kProtectedAPIEndpoint = "Enter_the_Protected_API_Full_URL_Here"
     let kScopes: [String] = ["Enter_the_Protected_API_Scopes_Here"]
-    
+
     var accessToken = String()
     var applicationContext : MSALPublicClientApplication?
     var webViewParamaters : MSALWebviewParameters?
@@ -107,12 +107,9 @@ extension ViewController {
      - clientId:            The clientID of your application, you should get this from the app portal.
      - redirectUri:         A redirect URI of your application, you should get this from the app portal.
      If nil, MSAL will create one by default. i.e./ msauth.<bundleID>://auth
-     - authority:           A URL indicating a directory that MSAL can use to obtain tokens. In Azure AD
-     it is of the form https://<instance/<tenant>, where <instance> is the
-     directory host (e.g. https://login.microsoftonline.com) and <tenant> is a
-     identifier within the directory itself (e.g. a domain associated to the
-     tenant, such as contoso.onmicrosoft.com, or the GUID representing the
-     TenantID property of the directory)
+     - authority:           A URL indicating a directory that MSAL can use to obtain tokens. In Microsoft Entra
+     it is of the form https://<tenantSubdomain>.ciamlogin.com, where <tenantSubdomain> is a
+     identifier within the directory itself (e.g. a domain associated to the tenant, such as contoso.ciamlogin.com)
      - error                The error that occurred creating the application object, if any, if you're
      not interested in the specific error pass in nil.
      */
