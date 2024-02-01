@@ -153,6 +153,8 @@ extension ViewController {
     @IBAction func acquireTokenInteractively() {
         guard let applicationContext = self.applicationContext else { return }
         guard let webViewParameters = self.webViewParamaters else { return }
+        
+        updateLogging(text: "Acquiring token interactively...")
 
         let parameters = MSALInteractiveTokenParameters(scopes: kScopes, webviewParameters: webViewParameters)
         parameters.promptType = .selectAccount
@@ -207,6 +209,8 @@ extension ViewController {
          - completionBlock:     The completion block that will be called when the authentication
          flow completes, or encounters an error.
          */
+        
+        updateLogging(text: "Acquiring token silently...")
         
         let parameters = MSALSilentTokenParameters(scopes: kScopes, account: account)
         
@@ -364,6 +368,8 @@ extension ViewController {
         guard let account = self.currentAccount else { return }
         
         guard let webViewParamaters = self.webViewParamaters else { return }
+        
+        updateLogging(text: "Signing out...")
         
         do {
             
