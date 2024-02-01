@@ -32,13 +32,17 @@ import MSAL
 
 class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate {
     
+    static let kTenantSubdomain = "TrialTenantFlOyyx5P"
+    let kAuthority = "https://\(kTenantSubdomain).ciamlogin.com"
+    
     // Update the below to your client ID you received in the portal.
-    let kAuthority = "Enter_the_Tenant_Authority_Here"
-    let kClientID = "Enter_the_Application_Id_Here"
-    let kRedirectUri = "Enter_the_Redirect_URI_Here"
-    let kProtectedAPIEndpoint = "Enter_the_Protected_API_Full_URL_Here"
-    let kScopes: [String] = ["Enter_the_Protected_API_Scopes_Here"]
-
+    let kClientID = "64806d23-44e4-48aa-974e-2c8d43a40579"
+    let kRedirectUri = "msauth.com.microsoft.identitysample.ciam.MSALiOS://auth"
+    
+    let kProtectedAPIEndpoint = "https://ciamwebappapi.azurewebsites.net/api/todolist"
+    let kScopes: [String] = ["api://bba1ea66-ec6c-4a14-9f61-88e6c32d39f3/ToDoList.Read",
+                             "api://bba1ea66-ec6c-4a14-9f61-88e6c32d39f3/ToDoList.ReadWrite"]
+    
     var accessToken = String()
     var applicationContext : MSALPublicClientApplication?
     var webViewParamaters : MSALWebviewParameters?
@@ -74,7 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     func platformViewDidLoadSetup() {
                 
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(appCameToforeGround(notification:)),
+                                               selector: #selector(appCameToForeGround(notification:)),
                                                name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
         
@@ -90,7 +94,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         }
     }
     
-    @objc func appCameToforeGround(notification: Notification) {
+    @objc func appCameToForeGround(notification: Notification) {
         self.loadCurrentAccount()
     }
 }
