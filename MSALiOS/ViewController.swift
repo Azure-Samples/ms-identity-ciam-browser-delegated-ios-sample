@@ -32,23 +32,22 @@ import MSAL
 
 class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate {
     
-    static let kTenantSubdomain = "TrialTenantFlOyyx5P"
-    let kAuthority = "https://\(kTenantSubdomain).ciamlogin.com"
-    
+    static let kTenantSubdomain = "Enter_the_Tenant_Subdomain_Here"
     // Update the below to your client ID you received in the portal.
-    let kClientID = "64806d23-44e4-48aa-974e-2c8d43a40579"
-    let kRedirectUri = "msauth.com.microsoft.identitysample.ciam.MSALiOS://auth"
+    let kClientID = "Enter_the_Application_Id_Here"
+    let kRedirectUri = "Enter_the_Redirect_URI_Here"
+    let kProtectedAPIEndpoint = "Enter_the_Protected_API_Full_URL_Here"
+    let kScopes: [String] = ["Enter_the_Protected_API_Scopes_Here"]
     
-    let kProtectedAPIEndpoint = "https://ciamwebappapi.azurewebsites.net/api/todolist"
-    let kScopes: [String] = ["api://bba1ea66-ec6c-4a14-9f61-88e6c32d39f3/ToDoList.Read",
-                             "api://bba1ea66-ec6c-4a14-9f61-88e6c32d39f3/ToDoList.ReadWrite"]
-    
+    let kAuthority = "https://\(kTenantSubdomain).ciamlogin.com"
+
     var accessToken = String()
     var applicationContext : MSALPublicClientApplication?
     var webViewParamaters : MSALWebviewParameters?
 
     @IBOutlet var loggingText: UITextView!
-    @IBOutlet var acquireTokenButton: UIButton!
+    @IBOutlet var tokenInteractivelyButton: UIButton!
+    @IBOutlet var tokenSilentlyButton: UIButton!
     @IBOutlet var signOutButton: UIButton!
     @IBOutlet var callAPIButton: UIButton!
     @IBOutlet var usernameLabel: UILabel!
