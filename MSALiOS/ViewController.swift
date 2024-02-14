@@ -183,9 +183,7 @@ extension ViewController {
             
             guard let currentAccount = account else {
                 
-                // We check to see if we have a current logged in account.
-                // If we don't, then we need to sign someone in.
-                self.acquireTokenInteractively()
+                self.updateLogging(text: "No token found, try to acquire a token interactively first")
                 return
             }
             
@@ -256,7 +254,6 @@ extension ViewController {
      */
     
     func getContentWithToken() {
-        
         // Specify the API endpoint
         guard let url = URL(string: kProtectedAPIEndpoint) else {
             let errorMessage = "Invalid API url"
@@ -268,6 +265,8 @@ extension ViewController {
         
         // Set the Authorization header for the request. We use Bearer tokens, so we specify Bearer + the token we got from the result
         request.setValue("Bearer \(self.accessToken)", forHTTPHeaderField: "Authorization")
+        
+        self.updateLogging(text: "Performing request...")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -368,7 +367,7 @@ extension ViewController {
         
         guard let webViewParamaters = self.webViewParamaters else { return }
         
-        updateLogging(text: "Signing out...")
+        updateLogging(text: "")
         
         do {
             
