@@ -2,7 +2,7 @@
 page_type: sample
 languages:
 - swift
-description: "The MSAL preview library for iOS and macOS gives your app the ability to begin using the Microsoft Cloud by supporting Microsoft Entra ID and Microsoft Accounts in a converged experience using industry standard OAuth2 and OpenID Connect."
+description: "The MSAL library for iOS and macOS gives your app the ability to begin using the Microsoft Cloud by supporting Microsoft Entra ID and Microsoft Accounts in a converged experience using industry standard OAuth2 and OpenID Connect."
 urlFragment: ios-ms-graph-api
 ---
 
@@ -22,7 +22,7 @@ The MSAL library for iOS gives your app the ability to begin using the [Microsof
 
 ## Scenario
 
-This app is a multi-tenant app meaning it can be used within any Microsoft Entra tenant and also supports signing in with Microsoft Account.  It demonstrates how a developer can build apps to connect with enterprise users and access their Azure + O365 data via the Microsoft Graph.  During the auth flow, end users will be required to sign in and consent to the permissions of the application, and in some cases may require an admin to consent to the app.  The majority of the logic in this sample shows how to auth an end user and make a basic call to the Microsoft Graph.
+This app is a multi-tenant app meaning it can be used within any Microsoft Entra tenant and also supports signing in with Microsoft Account.  It demonstrates how a developer can build apps to connect with enterprise users and access their Azure + data via the a private API.  During the auth flow, end users will be required to sign in and consent to the permissions of the application, and in some cases may require an admin to consent to the app.  The majority of the logic in this sample shows how to auth an end user and make a basic call to a private API.
 
 ![Topology](./images/iosintro.png)
 
@@ -42,23 +42,11 @@ From Terminal:
 ```terminal
 git clone https://github.com/Azure-Samples/ms-identity-mobile-apple-swift-objc.git
 ```
-or download and extract the repository.zip file, and navigate to 'MSALiOS.xcworkspace' from the active-directory-ios-swift-native-v2 folder
+or download and extract the repository .zip file, and navigate to 'MSALiOS.xcworkspace' from the active-directory-ios-swift-native-v2 folder
 
-## 1B: Installation
+## Step 2: Register your App
 
-Load the podfile using cocoapods. This will create a new XCode Workspace you will load.
-
-From terminal navigate to the directory where the podfile is located
-
-```
-$ pod install
-...
-$ open MSALiOS.xcworkspace
-```
-
-## Step 2: Register your App (Optional)
-
-This app comes pre-configured for testing. If you would like to register your own app, please follow the steps below.
+To register your own app, please follow the steps below.
 
 1. Sign in to the [Microsoft Entra Admin Center](https://entra.microsoft.com) using either a work or school account.
 2. In the left-hand navigation pane, select the **Microsoft Entra ID** blade, and then select **App registrations**.
@@ -75,7 +63,7 @@ This app comes pre-configured for testing. If you would like to register your ow
 ## Step 3: Run the sample
 
 1. Click the Run Button in the top menu or go to Product from the menu tab and click Run.
-2. Once the sample app launches, click on the 'Call Microsoft Graph API' button to go through the sign in flow and see the results from Microsoft Graph.
+2. Once the sample app launches, click on the 'Acquire Token Interactively' button to get an access token. After that, click on 'API - Perform GET' to see the results from the private API.
 
 ## How to add MSAL library into your existing Xcode project
 
@@ -102,22 +90,17 @@ In your app, add the `kClientID` variable with your Application (client) ID.
 ```swift
 // For example, you can declare a client id in this way. Below ID is just a sample.
     	
-let kClientID = "66855f8a-60cd-445e-a9bb-8cd8eadbd3fa"
+static let kClientID = "66855f8a-60cd-445e-a9bb-8cd8eadbd3fa"
 ```
 
-Add variables with your Microsoft Entra authority and Microsoft Graph endpoint for your national cloud.
+Add variables with your Microsoft Entra tenant subdomain and private API endpoint.
 
 ```swift
-let kGraphEndpoint = "https://graph.microsoft.com/"
-let kAuthority = "https://login.microsoftonline.com/common"
+static let kProtectedAPIEndpoint = "https://graph.microsoft.com/"
+let kTenantSubdomain = "Contoso"
 ```
 
-Other endpoints are documented [here](https://docs.microsoft.com/en-us/graph/deployments#app-registration-and-token-service-root-endpoints). For example, to run the sample with Azure Germany, use following:
-
-```swift
-let kGraphEndpoint = "https://graph.microsoft.de/"
-let kAuthority = "https://login.microsoftonline.de/common"
-```
+Other endpoints are documented [here](https://docs.microsoft.com/en-us/graph/deployments#app-registration-and-token-service-root-endpoints).
 
 ## Step 3: Configure Xcode project settings
 

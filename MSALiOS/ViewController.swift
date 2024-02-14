@@ -31,15 +31,6 @@ import MSAL
 /// 😃 A View Controller that will respond to the events of the Storyboard.
 
 class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate {
-    
-    static let kTenantSubdomain = "Enter_the_Tenant_Subdomain_Here"
-    // Update the below to your client ID you received in the portal.
-    let kClientID = "Enter_the_Application_Id_Here"
-    let kRedirectUri = "Enter_the_Redirect_URI_Here"
-    let kProtectedAPIEndpoint = "Enter_the_Protected_API_Full_URL_Here"
-    let kScopes: [String] = ["Enter_the_Protected_API_Scopes_Here"]
-    
-    let kAuthority = "https://\(kTenantSubdomain).ciamlogin.com"
 
     var accessToken = String()
     var applicationContext : MSALPublicClientApplication?
@@ -118,15 +109,15 @@ extension ViewController {
      */
     func initMSAL() throws {
         
-        guard let authorityURL = URL(string: kAuthority) else {
+        guard let authorityURL = URL(string: Configuration.kAuthority) else {
             self.updateLogging(text: "Unable to create authority URL")
             return
         }
         
         let authority = try MSALCIAMAuthority(url: authorityURL)
         
-        let msalConfiguration = MSALPublicClientApplicationConfig(clientId: kClientID,
-                                                                  redirectUri: kRedirectUri,
+        let msalConfiguration = MSALPublicClientApplicationConfig(clientId: Configuration.kClientID,
+                                                                  redirectUri: Configuration.kRedirectUri,
                                                                   authority: authority)
         self.applicationContext = try MSALPublicClientApplication(configuration: msalConfiguration)
         self.initWebViewParams()
@@ -155,7 +146,7 @@ extension ViewController {
         
         updateLogging(text: "Acquiring token interactively...")
 
-        let parameters = MSALInteractiveTokenParameters(scopes: kScopes, webviewParameters: webViewParameters)
+        let parameters = MSALInteractiveTokenParameters(scopes: Configuration.kScopes, webviewParameters: webViewParameters)
         parameters.promptType = .selectAccount
         
         applicationContext.acquireToken(with: parameters) { (result, error) in
@@ -209,7 +200,7 @@ extension ViewController {
         
         updateLogging(text: "Acquiring token silently...")
         
-        let parameters = MSALSilentTokenParameters(scopes: kScopes, account: account)
+        let parameters = MSALSilentTokenParameters(scopes: Configuration.kScopes, account: account)
         
         applicationContext.acquireTokenSilent(with: parameters) { (result, error) in
             
@@ -255,7 +246,7 @@ extension ViewController {
     
     func getContentWithToken() {
         // Specify the API endpoint
-        guard let url = URL(string: kProtectedAPIEndpoint) else {
+        guard let url = URL(string: Configuration.kProtectedAPIEndpoint) else {
             let errorMessage = "Invalid API url"
             print(errorMessage)
             updateLogging(text: errorMessage)
