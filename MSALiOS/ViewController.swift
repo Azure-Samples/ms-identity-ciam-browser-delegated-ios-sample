@@ -80,6 +80,8 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         self.loadCurrentAccount { [weak self] account in
             if let self = self, let account = account {
                 self.acquireTokenSilently(account)
+            } else {
+                self?.updateLogging(text: "")
             }
         }
     }
@@ -357,7 +359,7 @@ extension ViewController {
         
         guard let webViewParamaters = self.webViewParamaters else { return }
         
-        updateLogging(text: "")
+        updateLogging(text: "Signing out...")
         
         do {
             
