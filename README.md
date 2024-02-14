@@ -85,7 +85,7 @@ Add URI scheme in the  `Info.plist`. Redirect URI scheme follows the format `msa
 
 ## Step 2: Configure your application defaults
 
-In your app, add the `kClientID` variable with your Application (client) ID.
+In your app's Configuration.swift file, add the `kClientID` variable with your Application (client) ID.
 
 ```swift
 // For example, you can declare a client id in this way. Below ID is just a sample.
