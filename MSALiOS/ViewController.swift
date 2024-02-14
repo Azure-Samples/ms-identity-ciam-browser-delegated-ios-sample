@@ -315,9 +315,8 @@ extension ViewController {
             
             if let currentAccount = currentAccount {
                 
-                self.updateLogging(text: "Found a signed in account \(String(describing: currentAccount.username)). Updating data for that account...")
-                
                 self.updateCurrentAccount(account: currentAccount)
+                self.acquireTokenSilently(currentAccount)
                 
                 if let completion = completion {
                     completion(self.currentAccount)
