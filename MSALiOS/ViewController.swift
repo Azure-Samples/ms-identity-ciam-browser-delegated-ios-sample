@@ -77,6 +77,8 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateCurrentAccount(account: nil)
+        
         self.loadCurrentAccount { [weak self] account in
             if let self = self, let account = account {
                 self.acquireTokenSilently(account)
