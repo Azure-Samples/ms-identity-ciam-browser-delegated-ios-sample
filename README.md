@@ -17,14 +17,12 @@ The MSAL library for iOS gives your app the ability to begin using the [Microsof
 
 - How to get a token
 - How to refresh a token
-- How to call the Microsoft Graph API
+- How to call a private API
 - How to sign a user out of your application
 
 ## Scenario
 
-This app is a multi-tenant app meaning it can be used within any Microsoft Entra tenant and also supports signing in with Microsoft Account.  It demonstrates how a developer can build apps to connect with enterprise users and access their Azure + data via the a private API.  During the auth flow, end users will be required to sign in and consent to the permissions of the application, and in some cases may require an admin to consent to the app.  The majority of the logic in this sample shows how to auth an end user and make a basic call to a private API.
-
-![Topology](./images/iosintro.png)
+This app demonstrates how a developer can build apps to connect with enterprise users and access their Azure + data via the a private API.  During the auth flow, end users will be required to sign in and consent to the permissions of the application, and in some cases may require an admin to consent to the app.  The majority of the logic in this sample shows how to auth an end user and make a basic call to a private API.
 
 ## How to run this sample
 
@@ -42,7 +40,7 @@ From Terminal:
 ```terminal
 git clone https://github.com/Azure-Samples/ms-identity-ciam-browser-delegated-ios-sample.git
 ```
-or download and extract the repository .zip file, and navigate to 'MSALiOS.xcworkspace' from the active-directory-ios-swift-native-v2 folder
+or download and extract the repository .zip file, and navigate to 'MSALiOS.xcworkspace'
 
 ## Step 2: Register your App
 
