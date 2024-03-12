@@ -140,10 +140,6 @@ extension ViewController {
      This will invoke the authorization flow.
      */
     
-    @IBAction func callProtectedAPI(_ sender: UIButton) {
-        self.getContentWithToken()
-    }
-    
     @IBAction func acquireTokenInteractively() {
         guard let applicationContext = self.applicationContext else { return }
         guard let webViewParameters = self.webViewParamaters else { return }
@@ -184,6 +180,10 @@ extension ViewController {
             
             self.acquireTokenSilently(currentAccount)
         }
+    }
+    
+    @IBAction func callProtectedAPI(_ sender: UIButton) {
+        getContentWithToken()
     }
     
     func acquireTokenSilently(_ account : MSALAccount) {
@@ -308,8 +308,6 @@ extension ViewController {
         msalParameters.completionBlockQueue = DispatchQueue.main
                 
         // Note that this sample showcases an app that signs in a single account at a time
-        // If you're building a more complex app that signs in multiple accounts at the same time, you'll need to use a different account retrieval API that specifies account identifier
-        // For example, see "accountsFromDeviceForParameters:completionBlock:" - https://azuread.github.io/microsoft-authentication-library-for-objc/Classes/MSALPublicClientApplication.html#/c:objc(cs)MSALPublicClientApplication(im)accountsFromDeviceForParameters:completionBlock:
         applicationContext.getCurrentAccount(with: msalParameters, completionBlock: { (currentAccount, previousAccount, error) in
             
             if let error = error {
@@ -399,6 +397,7 @@ extension ViewController {
 }
 
 // MARK: Shared Device Helpers
+
 extension ViewController {
     
     func refreshDeviceMode() {
@@ -414,12 +413,13 @@ extension ViewController {
 }
 
 // MARK: UI Helpers
+
 extension ViewController {
     
     func updateLogging(text : String) {
         
         if Thread.isMainThread {
-            self.loggingText.text = text
+            loggingText.text = text
         } else {
             DispatchQueue.main.async {
                 self.loggingText.text = text
@@ -429,7 +429,7 @@ extension ViewController {
     
     func updateSignOutButton(enabled : Bool) {
         if Thread.isMainThread {
-            self.signOutButton.isEnabled = enabled
+            signOutButton.isEnabled = enabled
         } else {
             DispatchQueue.main.async {
                 self.signOutButton.isEnabled = enabled
@@ -439,7 +439,7 @@ extension ViewController {
     
     func updateAPIButton(enabled : Bool) {
         if Thread.isMainThread {
-            self.callAPIButton.isEnabled = enabled
+            callAPIButton.isEnabled = enabled
         } else {
             DispatchQueue.main.async {
                 self.callAPIButton.isEnabled = enabled
@@ -448,19 +448,18 @@ extension ViewController {
     }
     
     func updateAccountLabel() {
-        
         guard let currentAccount = self.currentAccount else {
-            self.usernameLabel.text = "Signed out"
+            usernameLabel.text = "Signed out"
             return
         }
         
-        self.usernameLabel.text = currentAccount.username
+        usernameLabel.text = currentAccount.username
     }
     
     func updateCurrentAccount(account: MSALAccount?) {
-        self.currentAccount = account
-        self.updateAccountLabel()
-        self.updateSignOutButton(enabled: account != nil)
-        self.updateAPIButton(enabled: account != nil)
+        currentAccount = account
+        updateAccountLabel()
+        updateSignOutButton(enabled: account != nil)
+        updateAPIButton(enabled: account != nil)
     }
 }
