@@ -1,4 +1,4 @@
-# Sign in users and call web API in sample iOS (Swift) mobile app
+# Sign in users and call a protected web API in sample iOS (Swift) mobile app
 
 * [Overview](#overview)
 * [Contents](#contents)
@@ -25,7 +25,7 @@ This guide demonstrates how to configure a sample iOS mobile application to sign
 
 - <a href="https://developer.apple.com/xcode/resources/" target="_blank">Xcode</a>.
 - Microsoft Entra External ID for customers tenant. If you don't already have one, <a href="https://aka.ms/ciam-free-trial?wt.mc_id=ciamcustomertenantfreetrial_linkclick_content_cnl" target="_blank">sign up for a free trial</a>. 
-- An API registration that exposes at least one scope (delegated permissions) and one app role (application permission) such as *ToDoList.Read*. If you haven't already, follow the instructions for [call an API in a sample iOS mobile app](sample-native-authentication-ios-sample-app-call-web-api.md) to have a functional protected ASP.NET Core web API. Make sure you complete the following steps:
+- An API registration that exposes at least one scope (delegated permissions) and one app role (application permission) such as *ToDoList.Read*. If you haven't already, follow the instructions for [call an API in a sample iOS mobile app](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-native-authentication-ios-sample-app-call-web-api) to have a functional protected ASP.NET Core web API. Make sure you complete the following steps:
 
     - Register a web API application.
     - Configure API scopes.
@@ -40,31 +40,31 @@ To enable your application to authenicate users with Microsoft Entra, Microsoft 
 
 ### Step 1: Register an application
 
-Register your app in the Microsoft Entra admin center using the steps in [Register an application](https://review.learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in?branch=pr-en-us-2665#register-an-application).
+Register your app in the Microsoft Entra admin center using the steps in [Register an application](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#register-an-application).
 
 ### Step 2: Add a platform redirect URL
 
-Add platform URL using the steps in [Add a platform redirect URL](https://review.learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in?branch=pr-en-us-2665#add-a-platform-redirect-url).
+Add platform URL using the steps in [Add a platform redirect URL](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#add-a-platform-redirect-url).
 
 ### Step 3: Enable public client flow
 
-Enable public client flow using the steps in [Enable public client flow](https://review.learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in?branch=pr-en-us-2665#enable-public-client-flow).
+Enable public client flow using the steps in [Enable public client flow](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#enable-public-client-flow).
 
-### Step 4: Grant API permissions
+### Step 4: Delegated permission to Microsoft Graph
 
-Grant API permissions using the steps in [Grant API permissions](https://review.learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in?branch=pr-en-us-2665#grant-api-permissions)
+Grant API permissions using the steps in [Delegated permission to Microsoft Graph](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#delegated-permission-to-microsoft-graph)
 
 ### Step 5: Grant web API permissions to the iOS sample app
 
-Grant web API permissions to the iOS sample app using the steps in [Grant web API permissions to the iOS sample app](https://review.learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in?branch=pr-en-us-2665#grant-web-api-permissions-to-the-ios-sample-app)
+Grant web API permissions to the iOS sample app using the steps in [Grant web API permissions to the iOS sample app](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#grant-web-api-permissions-to-the-ios-sample-app)
 
 ### Step 6: Clone sample iOS mobile application
 
-Clone the sample iOS mobile application by following the steps outlined in [Clone sample iOS mobile application](https://review.learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in?branch=pr-en-us-2665#clone-sample-ios-mobile-application).
+Clone the sample iOS mobile application by following the steps outlined in [Clone sample iOS mobile application](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#clone-sample-ios-mobile-application).
 
 ### Step 7: Run and test sample iOS mobile application
 
-Run and test the iOS sample mobile application by following the steps in [Run and test sample iOS mobile application](https://review.learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in?branch=pr-en-us-2665#run-ios-sample-app-and-call-web-api).
+Run and test the iOS sample mobile application by following the steps in [Run and test sample iOS mobile application](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#run-ios-sample-app-and-call-web-api).
 
 ## Key concepts
 
