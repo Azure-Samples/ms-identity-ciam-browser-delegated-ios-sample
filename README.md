@@ -52,11 +52,11 @@ Enable public client flow using the steps in [Enable public client flow](https:/
 
 ### Step 4: Delegated permission to Microsoft Graph
 
-Grant API permissions using the steps in [Delegated permission to Microsoft Graph](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#delegated-permission-to-microsoft-graph)
+Grant API permissions using the steps in [Delegated permission to Microsoft Graph](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#delegated-permission-to-microsoft-graph).
 
 ### Step 5: Grant web API permissions to the iOS sample app
 
-Grant web API permissions to the iOS sample app using the steps in [Grant web API permissions to the iOS sample app](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#grant-web-api-permissions-to-the-ios-sample-app)
+Grant web API permissions to the iOS sample app using the steps in [Grant web API permissions to the iOS sample app](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#grant-web-api-permissions-to-the-ios-sample-app).
 
 ### Step 6: Clone sample iOS mobile application
 
