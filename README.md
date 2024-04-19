@@ -1,132 +1,108 @@
----
-page_type: sample
-languages:
-- swift
-description: "The MSAL library for iOS and macOS gives your app the ability to begin using the Microsoft Cloud by supporting Microsoft Entra ID and Microsoft Accounts in a converged experience using industry standard OAuth2 and OpenID Connect."
-urlFragment: ios-ms-graph-api
----
+# Sign in users and call a protected web API in sample iOS (Swift) mobile app
 
-# MSAL iOS Swift Microsoft Graph API Sample
+* [Overview](#overview)
+* [Contents](#contents)
+* [Prerequisites](#prerequisites)
+* [Project setup](#project-setup)
+* [Key concepts](#key-concepts)
+* [Reporting problems](#reporting-problems)
+* [Contributing](#contributing)
 
-![Build Badge](https://identitydivision.visualstudio.com/_apis/public/build/definitions/a7934fdd-dcde-4492-a406-7fad6ac00e17/523/badge)
+## Overview
 
-| [Getting Started](https://docs.microsoft.com/azure/active-directory/develop/guidedsetups/active-directory-ios)| [Library](https://github.com/AzureAD/microsoft-authentication-library-for-objc) | [API Reference](https://azuread.github.io/docs/objc/) | [Support](README.md#feedback,community-help,-and-support)
-| --- | --- | --- | --- |
+This guide demonstrates how to configure a sample iOS mobile application to sign in users, and call an ASP.NET Core web API using Microsoft Entra for customers.
 
-The MSAL library for iOS gives your app the ability to begin using the [Microsoft identity platform](https://aka.ms/aaddev) by supporting [Microsoft Entra ID](https://azure.microsoft.com/en-us/services/active-directory/) and [Microsoft Accounts](https://account.microsoft.com) in a converged experience using industry standard OAuth2 and OpenID Connect. This sample demonstrates all the normal lifecycle your application should experience, including:
+## Contents
 
-- How to get a token
-- How to refresh a token
-- How to call a private API
-- How to sign a user out of your application
+| File/folder | Description |
+|-------------|-------------|
+| `MSALiOS/Configuration.swift`       | Configuration file. |
+| `.gitignore` | Define what to ignore at commit time. |
+| `README.md` | This README file. |
+| `LICENSE`   | The license for the sample. |
 
-## Scenario
+## Prerequisites
 
-This app demonstrates how a developer can build apps to connect with enterprise users and access their Azure + data via the a private API.  During the auth flow, end users will be required to sign in and consent to the permissions of the application, and in some cases may require an admin to consent to the app.  The majority of the logic in this sample shows how to auth an end user and make a basic call to a private API.
+- <a href="https://developer.apple.com/xcode/resources/" target="_blank">Xcode</a>.
+- Microsoft Entra External ID for customers tenant. If you don't already have one, <a href="https://aka.ms/ciam-free-trial?wt.mc_id=ciamcustomertenantfreetrial_linkclick_content_cnl" target="_blank">sign up for a free trial</a>. 
+- An API registration that exposes at least one scope (delegated permissions) and one app role (application permission) such as *ToDoList.Read*. If you haven't already, follow the instructions for [call an API in a sample iOS mobile app](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-native-authentication-ios-sample-app-call-web-api) to have a functional protected ASP.NET Core web API. Make sure you complete the following steps:
 
-## How to run this sample
+    - Register a web API application.
+    - Configure API scopes.
+    - Configure app roles.
+    - Configure optional claims.
+    - Clone or download sample web API.
+    - Configure and run sample web API.
 
-To run this sample, you'll need:
+## Project setup
 
-* Xcode
-* An internet connection
+To enable your application to authenicate users with Microsoft Entra, Microsoft Entra for customers must be made aware of the application you create. The following steps show you how to:
 
-## Step 1:
+### Step 1: Register an application
 
-## 1A: Clone or download this repository
+Register your app in the Microsoft Entra admin center using the steps in [Register an application](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#register-an-application).
 
-From Terminal:
+### Step 2: Add a platform redirect URL
 
-```terminal
-git clone https://github.com/Azure-Samples/ms-identity-ciam-browser-delegated-ios-sample.git
-```
-or download and extract the repository .zip file, and navigate to 'MSALiOS.xcworkspace'
+Add platform URL using the steps in [Add a platform redirect URL](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#add-a-platform-redirect-url).
 
-## Step 2: Register your App
+### Step 3: Enable public client flow
 
-To register your own app, please follow the steps below.
+Enable public client flow using the steps in [Enable public client flow](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#enable-public-client-flow).
 
-1. Sign in to the [Microsoft Entra Admin Center](https://entra.microsoft.com) using either a work or school account.
-2. In the left-hand navigation pane, select the **Microsoft Entra ID** blade, and then select **App registrations**.
-3. Click on the **New registration** button at the top left of the page.
-4. On the app registration page,
-   - Name your app
-   - Under **Supported account types**, select **Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)**
-   - Click **Register** to finish.
-5. After the app is created, you'll land on your app management page. Take note of the **Application (client) ID** as this would be needed for the step 2B below.
-6. Click **Authentication**, and add new Redirect URI with type **Public client (mobile & desktop)**. Enter redirect URI in format: `msauth.<app_bundle_id>://auth`. Replace <app_bundle_id> with the **Bundle Identifier** for your application. 
-7. Hit the **Save** button in the top left, to save these updates.
-8. Click **Make this change for me** and then download the code sample for iOS
+### Step 4: Delegated permission to Microsoft Graph
 
-## Step 3: Run the sample
+Grant API permissions using the steps in [Delegated permission to Microsoft Graph](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#delegated-permission-to-microsoft-graph).
 
-1. Click the Run Button in the top menu or go to Product from the menu tab and click Run.
-2. Once the sample app launches, click on the 'Acquire Token Interactively' button to get an access token. After that, click on 'API - Perform GET' to see the results from the private API.
+### Step 5: Grant web API permissions to the iOS sample app
 
-## How to add MSAL library into your existing Xcode project
+Grant web API permissions to the iOS sample app using the steps in [Grant web API permissions to the iOS sample app](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#grant-web-api-permissions-to-the-ios-sample-app).
 
-## Step 1: Configure your application Info.plist
+### Step 6: Clone sample iOS mobile application
 
-Add URI scheme in the  `Info.plist`. Redirect URI scheme follows the format `msauth.[app_bundle_id]`. Make sure to substitute [app_bundle_id] with the **Bundle Identifier** for your application.
+Clone the sample iOS mobile application by following the steps outlined in [Clone sample iOS mobile application](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#clone-sample-ios-mobile-application).
 
-```xml
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>msauth.[app_bundle_id]</string>
-    </array>
-  </dict>
-</array>
-```
+### Step 7: Run and test sample iOS mobile application
 
-## Step 2: Configure your application defaults
+Run and test the iOS sample mobile application by following the steps in [Run and test sample iOS mobile application](https://learn.microsoft.com/en-us/entra/external-id/customers/sample-mobile-app-ios-swift-sign-in-call-api#run-ios-sample-app-and-call-web-api).
 
-In your app's Configuration.swift file, add the `kClientID` variable with your Application (client) ID.
+## Key concepts
+
+Open `MSALiOS/Configuration.swift` file and you find the following configurations:
 
 ```swift
-// For example, you can declare a client id in this way. Below ID is just a sample.
-    	
-static let kClientID = "66855f8a-60cd-445e-a9bb-8cd8eadbd3fa"
+import Foundation
+
+@objcMembers
+class Configuration: NSObject {
+    static let kTenantSubdomain = "Enter_the_Tenant_Subdomain_Here"
+    
+    // Update the below to your client ID you received in the portal.
+    static let kClientID = "Enter_the_Application_Id_Here"
+    static let kRedirectUri = "Enter_the_Redirect_URI_Here"
+    static let kProtectedAPIEndpoint = "Enter_the_Protected_API_Full_URL_Here"
+    static let kScopes: [String] = ["Enter_the_Protected_API_Scopes_Here"]
+    
+    static let kAuthority = "https://\(kTenantSubdomain).ciamlogin.com"
+
+}
 ```
 
-Add variables with your Microsoft Entra tenant subdomain and private API endpoint.
+The Swift configuration file has:
 
-```swift
-static let kProtectedAPIEndpoint = "https://graph.microsoft.com/"
-let kTenantSubdomain = "Contoso"
-```
+- `Enter_the_Application_Id_Here` is replaced with the **Application (client) ID** of the app you registered earlier.
+- `Enter_the_Redirect_URI_Here` is replaced with the value of *kRedirectUri* in the Microsoft Authentication Library (MSAL) configuration file you downloaded earlier when you added the platform redirect URL.
+- `Enter_the_Protected_API_Full_URL_Here` is replaced with the URL to your web API. The *Enter_the_Protected_API_Full_URL_Here* should include the base URL (the deployed web API URL) and the endpoint (/api/todolist) for our ASP.NET web API.
+- `Enter_the_Protected_API_Scopes_Here` is replaced with the scopes recorded in [Grant web API permissions to the iOS sample app](#grant-web-api-permissions-to-the-ios-sample-app).
+- `Enter_the_Tenant_Subdomain_Here` and replace it with the Directory (tenant) subdomain. For example, if your tenant primary domain is `contoso.onmicrosoft.com`, use `contoso`. If you don't know your tenant subdomain, learn how to [read your tenant details](https://learn.microsoft.com/en-us/entra/external-id/customers/how-to-create-customer-tenant-portal#get-the-customer-tenant-details).
 
-Other endpoints are documented [here](https://docs.microsoft.com/en-us/graph/deployments#app-registration-and-token-service-root-endpoints).
+You use `MSALiOS/Configuration.swift` file to set configuration options when you initialize the client app in the Microsoft Authentication Library (MSAL).
 
-## Step 3: Configure Xcode project settings
+## Reporting problems
 
-Add a new keychain group to your project **Signing & Capabilities**. The keychain group should be `com.microsoft.adalcache` on iOS.
+* Search the [GitHub issues](https://github.com/Azure-Samples/ms-identity-ciam-browser-delegated-ios-sample/issues) in the repository - your problem might already have been reported or have an answer.
+* Nothing similar? [Open an issue](https://github.com/Azure-Samples/ms-identity-ciam-browser-delegated-ios-sample/issues/new) that clearly explains the problem you're having running the sample app.
 
-![Xcode UI displaying how the the keychain group should be set up](./images/iosintro-keychainShare.png)
+## Contributing
 
-## Feedback, Community Help, and Support
-
-We use [Stack Overflow](http://stackoverflow.com/questions/tagged/msal) with the community to provide support. We highly recommend you ask your questions on Stack Overflow first and browse existing issues to see if someone has asked your question before.
-
-If you find a bug or have a feature request, please raise the issue on [GitHub Issues](../../issues).
-
-To provide a recommendation, visit our [User Voice page](https://feedback.azure.com/forums/169401-azure-active-directory).
-
-## Contribute
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## Security Library
-
-This library controls how users sign-in and access services. We recommend you always take the latest version of our library in your app when possible. We use [semantic versioning](http://semver.org) so you can control the risk associated with updating your app. As an example, always downloading the latest minor version number (e.g. x.*y*.x) ensures you get the latest security and feature enhancements but our API surface remains the same. You can always see the latest version and release notes under the Releases tab of GitHub.
-
-## Security Reporting
-
-If you find a security issue with our libraries or services please report it to [secure@microsoft.com](mailto:secure@microsoft.com) with as much detail as possible. Your submission may be eligible for a bounty through the [Microsoft Bounty](http://aka.ms/bugbounty) 
-program. Please do not post security issues to GitHub Issues or any other public site. We will contact you shortly upon receiving the information. We encourage you to get notifications of when security incidents occur by visiting [this page](https://technet.microsoft.com/en-us/security/dd252948) and subscribing to Security Advisory Alerts.
-
-Copyright (c) Microsoft Corporation.  All rights reserved. Licensed under the MIT License (the "License");
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
